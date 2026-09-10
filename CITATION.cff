@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Если вы используете эти данные или код, сошлитесь на работу так:"
+title: "RPGI — Regional Price Gap Indicator"
+abstract: >-
+  Открытый индикатор разрыва цен первичного и вторичного рынков жилья по центрам
+  субъектов Российской Федерации и доли ипотечных выдач под договоры долевого участия
+  по регионам, с разложением разрыва на цену и состав и с явными границами применимости.
+version: 0.1.0
+date-released: "2026-09-10"
+type: dataset
+license: CC-BY-4.0
+license-url: "https://creativecommons.org/licenses/by/4.0/"
+repository-code: "https://github.com/rav11l/rpgi"
+url: "https://digitaleconomylab.ru/#tools"
+authors:
+  - family-names: "Akhtiamov"
+    given-names: "Ravil"
+    affiliation: "Digital Economy Lab"
+    orcid: "https://orcid.org/0000-0002-0783-8573"
+keywords:
+  - housing market
+  - price gap
+  - mortgage subsidies
+  - macroprudential policy
+  - regional indicators
+  - Russia

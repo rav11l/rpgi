@@ -1,0 +1,68 @@
+{
+  "собрано": "2026-09-10",
+  "источник": "rosstat.gov.ru — «Средние цены на первичном / вторичном рынке жилья по субъектам и центрам субъектов Российской Федерации»",
+  "разрез": "лист «по центру субъекта РФ», графа «Все типы квартир», I и II кварталы",
+  "файлы": [
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_perv_2kv-2026.xlsx",
+      "bytes": 37027,
+      "sha256": "b8110ffb9d717d76f9bf3520e993dbff41ee9ee77749d35e2b6b7013851d72b6"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_perv_4kv-2021.xlsx",
+      "bytes": 46163,
+      "sha256": "b6568a1f6b431b772d32ea0f3415f7340dde75804cb1d443f839925c18c4a8ce"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_perv_4kv-2022.xlsx",
+      "bytes": 44485,
+      "sha256": "c274f6f6b0a3b369fb5c350d542f0b451c7074884717f770d706449afdf3a835"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_perv_4kv-2023.xlsx",
+      "bytes": 50363,
+      "sha256": "4a2b65d51f284e9cec463fdad9c181f82a0202c6e94e27bd9eea15de00794ccd"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_perv_4kv-2024.xlsx",
+      "bytes": 49976,
+      "sha256": "18d57d0b6e1e810a9c8e5c375bae59275a5774ea3dfcb7770cd1b1b40ca5fab4"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_perv_4kv-2025.xlsx",
+      "bytes": 50247,
+      "sha256": "5acd5c2f6c0a00d1cdef56adf11a14313a27e55895b95c48a9ebb9b215da9a51"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_vtor_2kv-2026.xlsx",
+      "bytes": 35688,
+      "sha256": "f9e1659dcb40763e8affea487815bad4762159e5b30154cfbaf78b7c3789f601"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_vtor_4kv-2021.xlsx",
+      "bytes": 54664,
+      "sha256": "3c4965d7fa560ed780af292196e99fd121cfe6ceff4c7b54fbed7745f912ee4b"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_vtor_4kv-2022.xlsx",
+      "bytes": 55259,
+      "sha256": "e67a55a14e703f464289566a2c6ad5e1b7e3a919c346328c54e8d92020e58761"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_vtor_4kv-2023.xlsx",
+      "bytes": 55698,
+      "sha256": "972a17eaa373ecdd6cd7f3ade8e911fb6021e2ed68c7fe97d129cc66faf350a4"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_vtor_4kv-2024.xlsx",
+      "bytes": 54293,
+      "sha256": "beebff2afbbfa6c76a6123410f965c17070ddfad7a1cc6a9ada5f93f17a56038"
+    },
+    {
+      "file": "Данные/Первоисточники/rosstat/sred_cen_vtor_4kv-2025.xlsx",
+      "bytes": 53542,
+      "sha256": "139a12c08f368ae9fba6208aa79763c7aeb42db8ca39b819865de86e6e776cde"
+    }
+  ],
+  "сверка_изданий": "Каждый год проверен по всем доступным изданиям (4кв, 2кв, 1кв и внутренние имена вида Ur_MJil_2-3_YYYY): 26 книг, 14 пар. Максимальное расхождение по I и II кварталам графы «Все типы квартир» по всем центрам — 0,50 ₽, то есть округление (часть изданий хранит целые рубли). Ряд от выбора издания не зависит."
+}
