@@ -1,5 +1,7 @@
 # RPGI — Regional Price Gap Indicator, v0.1.0
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22693770.svg)](https://doi.org/10.5281/zenodo.22693770)
+
 Открытый индикатор разрыва цен между первичным и вторичным рынками жилья по центрам
 субъектов Российской Федерации и доли ипотечных выдач, уходящей на договоры долевого
 участия, по регионам.
@@ -105,4 +107,4 @@ python code/rpgi.py             # метрики, медианы, места, к
 ## Цитирование
 
 Ахтямов Р. RPGI — Regional Price Gap Indicator, v0.1.0. Digital Economy Lab, 2026.
-См. `CITATION.cff`.
+DOI: 10.5281/zenodo.22693770. См. `CITATION.cff`.

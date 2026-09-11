@@ -6,14 +6,15 @@ abstract: >-
   субъектов Российской Федерации и доли ипотечных выдач под договоры долевого участия
   по регионам, с разложением разрыва на цену и состав и с явными границами применимости.
 version: 0.1.0
+doi: "10.5281/zenodo.22693770"
 date-released: "2026-09-10"
 type: dataset
 license: CC-BY-4.0
 license-url: "https://creativecommons.org/licenses/by/4.0/"
 repository-code: "https://github.com/rav11l/rpgi"
-url: "https://digitaleconomylab.ru/#tools"
+url: "https://doi.org/10.5281/zenodo.22693770"
 authors:
-  - family-names: "Akhtiamov"
+  - family-names: "Akhtyamov"
     given-names: "Ravil"
     affiliation: "Digital Economy Lab"
     orcid: "https://orcid.org/0000-0002-0783-8573"
