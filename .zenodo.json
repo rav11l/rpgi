@@ -1,9 +1,9 @@
 {
-  "title": "RPGI — Regional Price Gap Indicator, v0.1.0",
-  "version": "0.1.0",
+  "title": "RPGI — Regional Price Gap Indicator, v0.2.0",
+  "version": "0.2.0",
   "upload_type": "dataset",
-  "publication_date": "2026-09-10",
-  "description": "<p>Открытый индикатор разрыва цен первичного и вторичного рынков жилья по центрам субъектов Российской Федерации (451 наблюдение, 72–77 центров, 2021–2026) и доли ипотечных выдач под договоры долевого участия по регионам (помесячно с 2019 года, 83 региона). Депозит содержит производные ряды, код разбора и расчёта, исходные книги Росстата и таблицы Банка России с sha256 и методическую записку с явными границами применимости.</p><p>Open indicator of the primary–secondary housing price gap across Russian regional capitals and of the share of mortgage lending going to shared-construction contracts, with a decomposition of the gap into price and composition and explicit limits of use.</p>",
+  "publication_date": "2026-09-15",
+  "description": "<p>Открытый индикатор разрыва цен первичного и вторичного рынков жилья по центрам субъектов Российской Федерации (451 наблюдение, 72–77 центров, 2021–2026) и доли ипотечных выдач под договоры долевого участия по регионам (помесячно с 2019 года, 83 региона). Депозит содержит производные ряды, код разбора и расчёта, исходные книги Росстата и таблицы Банка России с sha256 и методическую записку с явными границами применимости. Версия 0.2.0 добавляет панельную проверку с двусторонними фиксированными эффектами, пересчёт доли по числу договоров и связь разрыва со ставками.</p><p>Open indicator of the primary–secondary housing price gap across Russian regional capitals and of the share of mortgage lending going to shared-construction contracts, with a decomposition of the gap into price and composition and explicit limits of use.</p>",
   "creators": [
     {
       "name": "Akhtyamov, Ravil",

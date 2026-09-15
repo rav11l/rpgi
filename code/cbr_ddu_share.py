@@ -2,13 +2,13 @@
 """Доля ипотечных выдач под ДДУ по России, Татарстану и регионам.
 Источник: таблицы Банка России 02_11 (объём ИЖК) и 02_16 (объём ИЖК под ДДУ),
 лист «в рублях», помесячно с января 2019 года.
-Выход: Данные/cbr_rf_rt_ddu_share_2019_2026.csv и Данные/cbr_ddu_share_regions_2026_02.csv
+Выход: data/cbr_rf_rt_ddu_share_2019_2026.csv и Данные/cbr_ddu_share_regions_2026_02.csv
 """
 import csv, os, openpyxl
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(BASE, "Данные", "Первоисточники")
-OUT = os.path.join(BASE, "Данные")
+SRC = os.path.join(BASE, "data", "sources", "cbr")
+OUT = os.path.join(BASE, "data")
 
 def load(fn):
     ws = openpyxl.load_workbook(os.path.join(SRC, fn), read_only=True, data_only=True)["в рублях"]

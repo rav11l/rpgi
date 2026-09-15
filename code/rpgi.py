@@ -98,8 +98,8 @@ def main():
         w = csv.DictWriter(f, fieldnames=list(lines[0].keys()), delimiter=";")
         w.writeheader(); w.writerows(lines)
 
-    print("\nСвязь разрыва с разницей ставок по ДДУ и прочим кредитам в этот расчёт не входит:")
-    print("нужна таблица средневзвешенных ставок Банка России, в депозит не включена (см. README, «Границы»).")
+    print("\nСвязь разрыва с разницей ставок по ДДУ и прочим кредитам считается отдельно:")
+    print("python code/cbr_rates.py && python code/rates_check.py")
 
 if __name__ == "__main__":
     main()

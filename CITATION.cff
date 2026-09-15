@@ -5,14 +5,14 @@ abstract: >-
   Открытый индикатор разрыва цен первичного и вторичного рынков жилья по центрам
   субъектов Российской Федерации и доли ипотечных выдач под договоры долевого участия
   по регионам, с разложением разрыва на цену и состав и с явными границами применимости.
-version: 0.1.0
-doi: "10.5281/zenodo.22693770"
-date-released: "2026-09-10"
+version: 0.2.0
+doi: "10.5281/zenodo.22693769"
+date-released: "2026-09-15"
 type: dataset
 license: CC-BY-4.0
 license-url: "https://creativecommons.org/licenses/by/4.0/"
 repository-code: "https://github.com/rav11l/rpgi"
-url: "https://doi.org/10.5281/zenodo.22693770"
+url: "https://doi.org/10.5281/zenodo.22693769"
 authors:
   - family-names: "Akhtyamov"
     given-names: "Ravil"
