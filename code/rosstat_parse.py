@@ -34,6 +34,7 @@ def parse(path):
         name = str(ws.cell(r,1).value or "")
         if " - " not in name: continue
         reg = name.split(" - ",1)[1].strip()
+        reg = re.sub(r"\d\)$", "", reg).strip()   # сноска вида «Костромская область1)» (v0.3.0)
         vals = {}
         for q, c in cols.items():
             v = ws.cell(r,c).value
