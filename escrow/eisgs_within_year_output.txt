@@ -1,0 +1,28 @@
+       n  dl  d3
+pyr             
+2023  44   5   3
+2024  27   9   5
+2025  41  22  16
+2026   8   5   1
+completed 2019-2022 residential 243 marks 0 all completed <2023 263
+ongoing 164 residential 147
+delayed pyr year-only AUC 0.73 [0.65 0.82]
+delayed ryr year-only AUC 0.86 [0.79 0.91]
+d3 pyr year-only AUC 0.72 [0.64 0.82]
+d3 ryr year-only AUC 0.82 [0.74 0.89]
+within pyr delayed 0.74 [0.46 0.94] pairs 169
+within ryr delayed 0.71 [0.44 0.94] pairs 139
+year-only on 63 delayed 0.75
+within pyr d3 0.98 [0.88 1.  ] pairs 98
+within ryr d3 1.0 [1. 1.] pairs 84
+year-only on 63 d3 0.79
+within-pyr pd_12m delayed 0.52 [0.35 0.66] 754
+within-pyr pd_12m d3 0.55 [0.38 0.73] 616
+within-pyr pd_rate delayed 0.52 [0.36 0.68] 776
+within-pyr pd_rate d3 0.47 [0.32 0.63] 632
+within-pyr horizon_m delayed 0.52 [0.37 0.65] 790
+within-pyr horizon_m d3 0.54 [0.37 0.69] 640
+within-pyr log_flats delayed 0.47 [0.32 0.61] 790
+within-pyr log_flats d3 0.51 [0.36 0.67] 640
+same-year 0.97 [0.89 1.  ] n 33 pos 9
+other-year 0.66 [0.3 0.9] n 47 pos 10

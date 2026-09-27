@@ -1,0 +1,46 @@
+A. uncovered share (start of q)    y=d_lp1   N=420 R=71
+   unc          b= 0.0824 se=0.0713 t= 1.16
+A. uncovered share (start of q)    y=d_lgap  N=420 R=71
+   unc          b= 0.1243 se=0.0923 t= 1.35
+A. uncovered share (start of q)    y=d_lp2   N=420 R=71
+   unc          b=-0.0419 se=0.0514 t=-0.81
+B. + controls                      y=d_lp1   N=420 R=71
+   unc          b= 0.0856 se=0.0894 t= 0.96
+   d_share_ddu  b=-0.0055 se=0.0625 t=-0.09
+   l_dlp1       b=-0.2534 se=0.0520 t=-4.87
+C. coverage level (linear)         y=d_lp1   N=420 R=71
+   cov          b=-0.0152 se=0.0150 t=-1.01
+D. debt vs escrow growth (prev q)  y=d_lp1   N=349 R=71
+   d_ldebt      b= 0.0269 se=0.0408 t= 0.66
+   d_lesc       b=-0.0367 se=0.0384 t=-0.96
+B. + controls                      y=d_lgap  N=420 R=71
+   unc          b= 0.1262 se=0.1082 t= 1.17
+   d_share_ddu  b= 0.0424 se=0.0886 t= 0.48
+   l_dlp1       b=-0.2594 se=0.0642 t=-4.04
+C. coverage level (linear)         y=d_lgap  N=420 R=71
+   cov          b=-0.0126 se=0.0256 t=-0.49
+D. debt vs escrow growth (prev q)  y=d_lgap  N=349 R=71
+   d_ldebt      b= 0.0623 se=0.0546 t= 1.14
+   d_lesc       b=-0.0628 se=0.0496 t=-1.26
+E. escrow/limit 2022-2026          y=d_lp1   N=1314 R=77
+   l_covlim     b= 0.0035 se=0.0083 t= 0.42
+E. escrow/limit 2022-2026          y=d_lgap  N=1314 R=77
+   l_covlim     b=-0.0051 se=0.0101 t=-0.51
+E. escrow/limit 2022-2026          y=d_lp2   N=1314 R=77
+   l_covlim     b= 0.0087 se=0.0063 t= 1.38
+F. LEVEL on uncovered share        y=lp1     N=420 R=71
+   unc          b=-0.0074 se=0.1371 t=-0.05
+F. LEVEL on uncovered share        y=lgap    N=420 R=71
+   unc          b= 0.1029 se=0.1041 t= 0.99
+F. LEVEL on uncovered share        y=lp2     N=420 R=71
+   unc          b=-0.1103 se=0.0595 t=-1.85
+           unc      cov
+count  420.000  420.000
+mean     0.139    0.999
+std      0.164    0.364
+min      0.000    0.412
+25%      0.000    0.749
+50%      0.057    0.943
+75%      0.251    1.206
+max      0.588    2.810
+share region-quarters with cov<1: 0.52
