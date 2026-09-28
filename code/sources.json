@@ -1,0 +1,26 @@
+{
+  "_описание": "Адреса первоисточников RPGI для code/fetch.py. Таблицы ЦБ лежат под постоянными именами; книги Росстата меняют имя по кварталу издания, поэтому для них задан шаблон.",
+  "cbr": {
+    "dir": "data/sources/cbr",
+    "hashes": "data/sources/cbr/hashes_cbr.json",
+    "base_url": "https://www.cbr.ru/vfs/statistics/BankSector/Mortgage/",
+    "files": [
+      "02_10_Quantity_mortgage.xlsx",
+      "02_11_New_loans_mortgage.xlsx",
+      "02_13_Rates_mortgage.xlsx",
+      "02_15_Quantity_scpa_mortgage.xlsx",
+      "02_16_New_loans_scpa_mortgage.xlsx",
+      "02_17_Rates_scpa_mortgage.xlsx"
+    ]
+  },
+  "rosstat": {
+    "dir": "data/sources/rosstat",
+    "hashes": "data/sources/rosstat/hashes_rosstat.json",
+    "base_url": "https://rosstat.gov.ru/storage/mediabank/",
+    "_шаблон": "Проверить при первом живом запуске: адрес собран по образцу mediabank региональных отделений Росстата.",
+    "name_template": "sred_cen_{market}_{q}kv-{year}.xlsx",
+    "markets": ["perv", "vtor"],
+    "quarters": [1, 2, 3, 4],
+    "years_back": 1
+  }
+}
