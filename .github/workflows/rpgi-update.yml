@@ -51,7 +51,7 @@ jobs:
 
       - name: Сбор первоисточников
         id: fetch
-        run: python code/fetch.py --github-output --report "$RUNNER_TEMP/fetch.json"
+        run: python -u code/fetch.py --github-output --report "$RUNNER_TEMP/fetch.json"
 
       - name: Сборка живого ряда
         if: steps.fetch.outputs.changed == 'true'

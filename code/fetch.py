@@ -24,11 +24,24 @@
 
 Зависимости: Python 3.9+, openpyxl.
 """
-import argparse, datetime as dt, hashlib, io, json, os, sys, time, urllib.error, urllib.request, zipfile
+import argparse, datetime as dt, hashlib, io, json, os, ssl, sys, time, urllib.error, urllib.parse, urllib.request, zipfile
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(BASE, "code", "sources.json")
 UA = "RPGI-fetch/1.0 (+https://github.com/rav11l/rpgi)"
+DEAD_HOSTS = {}   # хост → причина: после сетевой ошибки остальные файлы хоста не запрашиваются
+_CTX = {}
+
+
+def ssl_context(cafile):
+    """Стандартное хранилище плюс, если задан, дополнительный файл сертификатов
+    (для Росстата — сертификаты Минцифры, code/certs/russian_trusted_ca.pem)."""
+    if cafile not in _CTX:
+        ctx = ssl.create_default_context()
+        if cafile:
+            ctx.load_verify_locations(os.path.join(BASE, cafile))
+        _CTX[cafile] = ctx
+    return _CTX[cafile]
 
 
 def sha256(data):
@@ -43,22 +56,28 @@ def remap(url, mirror):
     return mirror.rstrip("/") + "/" + rest
 
 
-def download(url, tries=3, timeout=60):
-    """Возвращает (байты, None) или (None, причина). 404 — не ошибка сети, а отсутствие файла."""
+def download(url, cafile=None, tries=3, timeout=30):
+    """Возвращает (байты, None, False) или (None, причина, сетевая_ли_ошибка).
+    404 — не ошибка сети, а отсутствие файла. Ошибку TLS не повторяем: она не пройдёт сама."""
     last = None
     for i in range(tries):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read(), None
+            with urllib.request.urlopen(req, timeout=timeout, context=ssl_context(cafile)) as r:
+                return r.read(), None, False
         except urllib.error.HTTPError as e:
             if e.code in (403, 404, 410):
-                return None, "HTTP %d" % e.code
+                return None, "HTTP %d" % e.code, False
             last = "HTTP %d" % e.code
-        except Exception as e:  # сеть, таймаут, TLS
+        except urllib.error.URLError as e:
+            if isinstance(e.reason, ssl.SSLError):
+                return None, "TLS: %s" % e.reason, True
             last = "%s: %s" % (type(e).__name__, e)
-        time.sleep(2 * (i + 1))
-    return None, last
+        except Exception as e:  # таймаут, обрыв соединения
+            last = "%s: %s" % (type(e).__name__, e)
+        if i < tries - 1:
+            time.sleep(2 * (i + 1))
+    return None, last, not last.startswith("HTTP")
 
 
 def valid_xlsx(data):
@@ -99,13 +118,28 @@ def write_atomic(path, data):
     os.replace(tmp, path)
 
 
-def check_one(name, url, local_path, known_sha, required, args, log):
-    data, err = download(remap(url, args.mirror))
+def emit(rec):
+    if rec["status"] != "absent":
+        extra = rec.get("reason") or rec.get("sha256", "")[:12]
+        print("%-9s %-40s %s" % (rec["status"], rec["file"], extra), flush=True)
+
+
+def check_one(name, url, local_path, known_sha, required, args, log, cafile=None):
     rec = {"file": name, "url": url, "required": required}
+    host = urllib.parse.urlparse(url).hostname
+    if host in DEAD_HOSTS:
+        rec["status"], rec["reason"] = "failed", "пропущено: %s недоступен (%s)" % (host, DEAD_HOSTS[host])
+        log.append(rec)
+        emit(rec)
+        return None
+    data, err, network = download(remap(url, args.mirror), cafile)
     if data is None:
+        if network:
+            DEAD_HOSTS[host] = err[:80]
         rec["status"] = "failed" if required or not err.startswith("HTTP 404") else "absent"
         rec["reason"] = err
         log.append(rec)
+        emit(rec)
         return None
     ok, why = valid_xlsx(data)
     if not ok:
@@ -114,6 +148,7 @@ def check_one(name, url, local_path, known_sha, required, args, log):
         rec["status"] = "failed" if required else "not_xlsx"
         rec["reason"] = why
         log.append(rec)
+        emit(rec)
         return None
     h = sha256(data)
     rec.update(sha256=h, bytes=len(data))
@@ -125,6 +160,7 @@ def check_one(name, url, local_path, known_sha, required, args, log):
         if not args.dry_run:
             write_atomic(local_path, data)
     log.append(rec)
+    emit(rec)
     return rec
 
 
@@ -164,7 +200,7 @@ def fetch_rosstat(cfg, args, log, today):
                 name = c["name_template"].format(market=market, q=q, year=year)
                 prev = by_name.get(name)
                 rec = check_one(name, c["base_url"] + name, os.path.join(BASE, c["dir"], name),
-                                prev["sha256"] if prev else None, False, args, log)
+                                prev["sha256"] if prev else None, False, args, log, c.get("cafile"))
                 if rec and rec["status"] in ("new", "changed"):
                     entry = {"file": c["dir"] + "/" + name, "bytes": rec["bytes"], "sha256": rec["sha256"]}
                     if prev:
@@ -201,11 +237,6 @@ def main():
     changed = [r for r in log if r["status"] in ("new", "changed")]
     failed = [r for r in log if r["status"] == "failed" and r["required"]]
     warned = [r for r in log if r["status"] == "failed" and not r["required"]]
-    for r in log:
-        if r["status"] == "absent":
-            continue
-        extra = r.get("reason") or r.get("sha256", "")[:12]
-        print("%-9s %-40s %s" % (r["status"], r["file"], extra))
     absent = sum(r["status"] == "absent" for r in log)
     not_xlsx = [r for r in log if r["status"] == "not_xlsx"]
     print("\nизменилось: %d, ошибок ЦБ: %d, недоступно у Росстата: %d, не книга по адресу Росстата: %d, "

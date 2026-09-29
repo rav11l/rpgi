@@ -17,6 +17,8 @@
     "dir": "data/sources/rosstat",
     "hashes": "data/sources/rosstat/hashes_rosstat.json",
     "base_url": "https://rosstat.gov.ru/storage/mediabank/",
+    "cafile": "code/certs/russian_trusted_ca.pem",
+    "_cafile": "TLS-сертификат rosstat.gov.ru выдан удостоверяющим центром Минцифры, которого нет в стандартных хранилищах.",
     "_шаблон": "Проверить при первом живом запуске: адрес собран по образцу mediabank региональных отделений Росстата.",
     "name_template": "sred_cen_{market}_{q}kv-{year}.xlsx",
     "markets": ["perv", "vtor"],
