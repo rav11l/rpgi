@@ -1,0 +1,99 @@
+# Еженедельное обновление первоисточников RPGI.
+#
+# Скачивает таблицы ЦБ и книги Росстата (code/fetch.py). Если что-то изменилось —
+# пересобирает живой ряд, прогоняет проверки (code/checks.py) и открывает pull request
+# с отчётом. Публикации без человека нет: релиз и новая версия на Zenodo появляются
+# только после merge и ручного выпуска релиза.
+#
+# Каталоги capitalization/ и escrow/ не пересчитываются: это расчёты к конкретным
+# working papers, их числа закреплены за версией работы.
+#
+# Где запускать. cbr.ru и rosstat.gov.ru могут ограничивать зарубежный трафик, а
+# стандартные машины GitHub находятся за рубежом. Если fetch падает с ошибками сети,
+# заведите self-hosted runner с российским адресом и укажите его метку в переменной
+# репозитория RPGI_RUNNER (Settings → Secrets and variables → Actions → Variables).
+#
+# Чтобы workflow мог открывать pull request, включите
+# Settings → Actions → General → «Allow GitHub Actions to create and approve pull requests».
+
+name: RPGI — обновление первоисточников
+
+on:
+  schedule:
+    - cron: "23 6 * * 1"        # понедельник, 09:23 по Москве
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: rpgi-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ${{ vars.RPGI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Зависимости
+        run: pip install openpyxl
+
+      - name: Дата запуска
+        id: date
+        run: echo "d=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Сбор первоисточников
+        id: fetch
+        run: python code/fetch.py --github-output --report "$RUNNER_TEMP/fetch.json"
+
+      - name: Сборка живого ряда
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          python code/rosstat_gap.py
+          python code/cbr_ddu_share.py
+          python code/cbr_rates.py
+          python code/rpgi.py
+
+      - name: Проверки
+        id: checks
+        if: steps.fetch.outputs.changed == 'true'
+        continue-on-error: true
+        run: python code/checks.py --github-output --report "$RUNNER_TEMP/checks.md"
+
+      - name: Описание pull request
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          python - <<'EOF'
+          import json, os
+          t = os.environ["RUNNER_TEMP"]
+          rep = json.load(open(os.path.join(t, "fetch.json"), encoding="utf-8"))
+          lines = ["## Первоисточники", "", "| Файл | Статус | sha256 |", "|---|---|---|"]
+          for r in rep["files"]:
+              if r["status"] in ("new", "changed", "failed", "not_xlsx"):
+                  lines.append("| %s | %s | %s |" % (r["file"], r["status"],
+                               r.get("sha256", r.get("reason", ""))[:16]))
+          body = "\n".join(lines) + "\n\n" + open(os.path.join(t, "checks.md"), encoding="utf-8").read()
+          body += "\n---\nПеред merge: прочитать предупреждения, дописать CHANGELOG. " \
+                  "После merge: выпустить релиз — Zenodo создаст новую версию под общим DOI.\n"
+          open(os.path.join(t, "pr_body.md"), "w", encoding="utf-8").write(body)
+          EOF
+
+      - name: Pull request
+        if: steps.fetch.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: rpgi/auto-update
+          delete-branch: true
+          commit-message: "Обновление первоисточников RPGI (автоматически)"
+          title: "${{ steps.checks.outputs.ok == 'true' && 'Обновление RPGI' || '[проверки не пройдены] Обновление RPGI' }} — ${{ steps.date.outputs.d }}"
+          body-path: ${{ runner.temp }}/pr_body.md
+          draft: ${{ steps.checks.outputs.ok != 'true' }}
+          add-paths: |
+            data/**

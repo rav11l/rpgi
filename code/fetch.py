@@ -109,7 +109,9 @@ def check_one(name, url, local_path, known_sha, required, args, log):
         return None
     ok, why = valid_xlsx(data)
     if not ok:
-        rec["status"] = "failed" if required else "absent"
+        # у ЦБ это ошибка; у Росстата — «не книга»: либо файла нет и сайт отдал заглушку
+        # с кодом 200, либо адрес сменился. В отчёт идёт отдельной строкой, запуск не валит.
+        rec["status"] = "failed" if required else "not_xlsx"
         rec["reason"] = why
         log.append(rec)
         return None
@@ -205,8 +207,10 @@ def main():
         extra = r.get("reason") or r.get("sha256", "")[:12]
         print("%-9s %-40s %s" % (r["status"], r["file"], extra))
     absent = sum(r["status"] == "absent" for r in log)
-    print("\nизменилось: %d, ошибок ЦБ: %d, недоступно у Росстата: %d, не опубликовано (Росстат): %d%s"
-          % (len(changed), len(failed), len(warned), absent, "  [dry-run: ничего не записано]" if args.dry_run else ""))
+    not_xlsx = [r for r in log if r["status"] == "not_xlsx"]
+    print("\nизменилось: %d, ошибок ЦБ: %d, недоступно у Росстата: %d, не книга по адресу Росстата: %d, "
+          "не опубликовано (Росстат): %d%s"
+          % (len(changed), len(failed), len(warned), len(not_xlsx), absent, "  [dry-run: ничего не записано]" if args.dry_run else ""))
 
     if args.report:
         save_json(args.report, {"date": today, "dry_run": args.dry_run, "files": log})
