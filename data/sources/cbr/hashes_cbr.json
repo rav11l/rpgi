@@ -11,11 +11,12 @@
   },
   "лист": "«в рублях» для объёмов и количеств, «ставка в рублях» для 02_13 и 02_17",
   "sha256": {
-    "02_10_Quantity_mortgage.xlsx": "15d8aa53a0f78fa34c3d96b7a07aa88f3f71092830336f401f641f3fd879f5b0",
-    "02_11_New_loans_mortgage.xlsx": "5c8443d511260ac754d7f73650717b825a0d64ebce2304fb1047150f5cbf1b54",
-    "02_13_Rates_mortgage.xlsx": "1da7887e6f96ab532e8822f59d43807bdf234b0cac461ec771fd662aa345129f",
-    "02_15_Quantity_scpa_mortgage.xlsx": "1b4261d690a9ed36e576a29628cdf052a62cf95a872e863265fd4ba3085fadaf",
-    "02_16_New_loans_scpa_mortgage.xlsx": "165e937b622238e91dc82c88116076dfee30e8bb5d6f7ad989536e82beb13738",
-    "02_17_Rates_scpa_mortgage.xlsx": "21427e083a3c0ecc3d45fbe68a863e93a90b9f6e4241cc825a52756f0ca7a124"
-  }
+    "02_10_Quantity_mortgage.xlsx": "aaf91ddb85b3307ea207e368847e87bba23c5f3cbba43d0d469c3c35a713ffce",
+    "02_11_New_loans_mortgage.xlsx": "dd8b0b9c3a28d2b7115df7d55630674e3360bbdd7507b49cd960fb7da9877007",
+    "02_13_Rates_mortgage.xlsx": "02b451ef4c35b3a9bcb5f4cd7f44d811023ed6f1fff52e615d6b0d2ad7c06c1b",
+    "02_15_Quantity_scpa_mortgage.xlsx": "6d201c875f4ab3743faa0deb10c6ae9c383db381318ebd13d3241d2e692a5c33",
+    "02_16_New_loans_scpa_mortgage.xlsx": "057c4cc3fe6b3237c094d0d765e36dd2ec547844045315eaebe75faa06361ec4",
+    "02_17_Rates_scpa_mortgage.xlsx": "908d49408ff5c006e17f57dd1f1188a6a3c429b766b963420fb737fa7c189cb2"
+  },
+  "обновлено": "2026-10-05"
 }
