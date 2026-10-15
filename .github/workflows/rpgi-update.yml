@@ -2,8 +2,17 @@
 #
 # Скачивает таблицы ЦБ и книги Росстата (code/fetch.py). Если что-то изменилось —
 # пересобирает живой ряд, прогоняет проверки (code/checks.py) и открывает pull request
-# с отчётом. Публикации без человека нет: релиз и новая версия на Zenodo появляются
-# только после merge и ручного выпуска релиза.
+# с отчётом.
+#
+# Дальше развилка. Проверки чистые — ни ошибок, ни предупреждений — pull request
+# вливается в main сам: обновление данных не должно ждать человека, иначе ряд стоит
+# неделями, как это было с августом 2026 года. Есть хоть одно предупреждение или
+# ошибка — pull request остаётся открытым, а запуск падает, чтобы GitHub прислал
+# письмо: молчание не должно выглядеть как успех.
+#
+# Публикации без человека по-прежнему нет: CHANGELOG дописывается руками, а новая
+# версия на Zenodo появляется только после ручного выпуска релиза. Автоматика
+# доводит до main данные, но не выпускает версию работы.
 #
 # Каталоги capitalization/ и escrow/ не пересчитываются: это расчёты к конкретным
 # working papers, их числа закреплены за версией работы.
@@ -69,6 +78,9 @@ jobs:
 
       - name: Описание pull request
         if: steps.fetch.outputs.changed == 'true'
+        env:
+          CHECKS_OK: ${{ steps.checks.outputs.ok }}
+          CHECKS_WARNINGS: ${{ steps.checks.outputs.warnings }}
         run: |
           python - <<'EOF'
           import json, os
@@ -80,12 +92,17 @@ jobs:
                   lines.append("| %s | %s | %s |" % (r["file"], r["status"],
                                r.get("sha256", r.get("reason", ""))[:16]))
           body = "\n".join(lines) + "\n\n" + open(os.path.join(t, "checks.md"), encoding="utf-8").read()
-          body += "\n---\nПеред merge: прочитать предупреждения, дописать CHANGELOG. " \
-                  "После merge: выпустить релиз — Zenodo создаст новую версию под общим DOI.\n"
+          clean = os.environ.get("CHECKS_OK") == "true" and os.environ.get("CHECKS_WARNINGS") == "0"
+          body += "\n---\n"
+          body += ("Проверки чистые — изменения в data/ влиты в main автоматически.\n"
+                   if clean else
+                   "Проверки не чистые — pull request ждёт человека, запуск помечен как упавший.\n")
+          body += "CHANGELOG дописывается руками. Новая версия на Zenodo — только после выпуска релиза.\n"
           open(os.path.join(t, "pr_body.md"), "w", encoding="utf-8").write(body)
           EOF
 
       - name: Pull request
+        id: pr
         if: steps.fetch.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
@@ -97,3 +114,22 @@ jobs:
           draft: ${{ steps.checks.outputs.ok != 'true' }}
           add-paths: |
             data/**
+
+      - name: Влить, если проверки чистые
+        if: steps.fetch.outputs.changed == 'true'
+          && steps.checks.outputs.ok == 'true'
+          && steps.checks.outputs.warnings == '0'
+          && steps.pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge "${{ steps.pr.outputs.pull-request-number }}" --squash --delete-branch
+          echo "Pull request #${{ steps.pr.outputs.pull-request-number }} влит в main."
+
+      - name: Проверки не чистые — уронить запуск
+        if: steps.fetch.outputs.changed == 'true'
+          && (steps.checks.outputs.ok != 'true' || steps.checks.outputs.warnings != '0')
+        run: |
+          echo "::error::Первоисточники обновились, но проверки не чистые."
+          echo "::error::Pull request ждёт человека: ${{ steps.pr.outputs.pull-request-url }}"
+          exit 1

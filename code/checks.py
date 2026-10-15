@@ -266,7 +266,8 @@ def main():
     ap = argparse.ArgumentParser(description="Проверки ряда RPGI перед публикацией")
     ap.add_argument("--baseline-ref", default="HEAD", help="с какой версией сравнивать (git ref)")
     ap.add_argument("--report", help="записать отчёт в файл Markdown")
-    ap.add_argument("--github-output", action="store_true", help="записать ok=true|false в $GITHUB_OUTPUT")
+    ap.add_argument("--github-output", action="store_true",
+                    help="записать ok=true|false и warnings=<число> в $GITHUB_OUTPUT")
     args = ap.parse_args()
 
     rep = Report()
@@ -282,6 +283,7 @@ def main():
     if args.github_output and os.environ.get("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
             f.write("ok=%s\n" % ("false" if rep.errors else "true"))
+            f.write("warnings=%d\n" % len(rep.warnings))
     sys.exit(1 if rep.errors else 0)
 
 
