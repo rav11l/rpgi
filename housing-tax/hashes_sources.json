@@ -1,0 +1,15 @@
+{
+  "sources/proekt_zakona_RT_nalog_na_imushchestvo_2026-10-12.docx": {
+    "sha256": "d317c51876b283977a2a4d11f0b8a988834475e95f165fd0ad4fd49c11321374",
+    "url": "https://tatarstan.ru/rus/file/corrupt/corrupt_540361.docx",
+    "page": "https://tatarstan.ru/regulation/expertise/list/minfin.htm?corrupt_id=540365",
+    "also": "https://minfin.tatarstan.ru/proekti-normativnih-pravovih-aktov-respubliki.htm?pub_id=5165538",
+    "posted": "2026-10-12"
+  },
+  "../escrow/sources/eisgs/eisgs_kazan_objects.csv": {
+    "sha256": "5b40eedffc7a350f78339df3d0e0308d3c33fbba12233af0075fec2c37618e2b"
+  },
+  "../escrow/cbr_pf_regions.csv": {
+    "sha256": "39b54b9d85afca3fcabf45169852d98f0e39e207dff462fcccbda723b235aeb7"
+  }
+}

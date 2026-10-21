@@ -65,7 +65,7 @@ python code/figs_article.py     # три рисунка в figs/ (нужен mat
 ## Обновление
 
 Живой ряд — разрыв цен, доля выдач под ДДУ и ставки — обновляется по мере публикации
-первоисточников. Каталоги `capitalization/` и `escrow/` не обновляются: это расчёты
+первоисточников. Каталоги `capitalization/`, `escrow/` и `housing-tax/` не обновляются: это расчёты
 к конкретным working papers, их числа закреплены за версией работы.
 
 ```
@@ -196,6 +196,14 @@ python escrow/eisgs_build.py           # ЕИСЖС → escrow/panel.csv (при
 python escrow/eisgs_sample.py          # выборка сданных с 2023 года → escrow/sample_completed.csv
 python escrow/eisgs_auc.py             # по декларациям, AUC с бутстрепом по застройщикам → projects.csv, auc_results.csv
 python escrow/eisgs_within_year.py     # когорты по плановой дате, AUC внутри года
+```
+
+## Налог на непроданное жильё (с версии 0.5.0)
+
+Каталог `housing-tax/` содержит расчёты к working paper WP-2026-07 «Налог на непроданные квартиры в Татарстане» (digitaleconomylab.ru/wp-2026-07): остаток непроданного жилья в сданных домах Казани по ЕИСЖС, нагрузку на застройщика и сценарии поступлений в бюджет РТ по проекту закона РТ о переводе жилых помещений организаций на кадастровую базу. Новых выгрузок нет: входные данные — файлы `escrow/` (хеши совпадают), текст проекта закона лежит в `housing-tax/sources/`. Подробности и границы — в `housing-tax/README.md`.
+
+```
+python housing-tax/calc.py             # → housing-tax/calc_results.json
 ```
 
 Дополнительные зависимости: scikit-learn. Главные результаты:
