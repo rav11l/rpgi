@@ -11,5 +11,11 @@
   },
   "../escrow/cbr_pf_regions.csv": {
     "sha256": "39b54b9d85afca3fcabf45169852d98f0e39e207dff462fcccbda723b235aeb7"
+  },
+  "Jil_hoz_2025.pdf (не входит в депозит)": {
+    "sha256": "cc90bebfa2b82c32d8fb5732f4f6c0eb13bd4b68c987c2e173235aa7d37b55c2",
+    "publisher": "Росстат",
+    "title": "Жилищное хозяйство в России. 2025",
+    "used": "табл. 2.2, диагр. 2.3 — блок v1.3 calc.py"
   }
 }

@@ -66,3 +66,26 @@ for nm,m in [('низкий',1.0),('базовый',1.8)]:
 R['v11_rt']['высокий']=dict(stock=0.8,y2027=0.8e6*K*0.01/1e9,y2028=0.8e6*K*0.02/1e9,note='BO-based, window not applied')
 json.dump(R,open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=1,default=float)
 print(json.dumps(R['v11_rt'],ensure_ascii=False,indent=1,default=float))
+
+# ---- v1.3: жилые помещения прочих организаций (не застройщиков) ----
+# Проект переводит на кадастровую базу жильё всех организаций, а не только застройщиков.
+# Региональных данных о жилье организаций в открытой статистике нет; оценка — сценарная.
+# Росстат, «Жилищное хозяйство в России. 2025», табл. 2.2 и диагр. 2.3: на конец 2024 г.
+# частный фонд — 94,7 % всего фонда, в т. ч. в собственности граждан — 92,7 %;
+# остаток 2,0 % — собственность юридических лиц и нераспределённый фонд (с 2020 г. включён в частный).
+RF_fund=4293.0                      # млн м², весь жилищный фонд РФ на конец 2024 г.
+RF_share_noncit=0.947-0.927         # доля фонда вне собственности граждан внутри частного
+RT_pop=4.0                          # млн чел., постоянное население РТ (округлённо)
+RT_fund=RT_pop*RF_fund/146.1        # приближение: обеспеченность РТ = средней по РФ
+R['v13_other']={'RF_share_noncit':RF_share_noncit,'RT_fund_approx':RT_fund,
+  'RT_upper_stock':RT_fund*RF_share_noncit-R['v11_rt']['базовый']['stock']}
+sc13={'низкий':0.25,'базовый':0.5,'высокий':1.0}   # % фонда РТ: 1/8, 1/4, 1/2 общероссийской доли 2,0 %
+R['v13_other']['scen']={}
+for nm,pct in sc13.items():
+    st=RT_fund*pct/100
+    R['v13_other']['scen'][nm]=dict(pct=pct,stock=st,y2027=st*1e6*K*0.01/1e9,y2028=st*1e6*K*0.02/1e9,
+        y2028_K100=st*1e6*100000*0.02/1e9)
+R['v13_total']={nm:dict(y2027=R['v11_rt'][nm]['y2027']+R['v13_other']['scen'][nm]['y2027'],
+                       y2028=R['v11_rt'][nm]['y2028']+R['v13_other']['scen'][nm]['y2028']) for nm in sc13}
+json.dump(R,open(OUT,'w'),ensure_ascii=False,indent=1,default=float)
+print(json.dumps({k:R[k] for k in ['v13_other','v13_total']},ensure_ascii=False,indent=1,default=float))
