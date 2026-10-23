@@ -89,3 +89,40 @@ R['v13_total']={nm:dict(y2027=R['v11_rt'][nm]['y2027']+R['v13_other']['scen'][nm
                        y2028=R['v11_rt'][nm]['y2028']+R['v13_other']['scen'][nm]['y2028']) for nm in sc13}
 json.dump(R,open(OUT,'w'),ensure_ascii=False,indent=1,default=float)
 print(json.dumps({k:R[k] for k in ['v13_other','v13_total']},ensure_ascii=False,indent=1,default=float))
+
+# ---- v1.4: кадастровая стоимость новостроек, переоценка, содержание, большой остаток ----
+# 1) Выборка НСПД (23.10.2026): 58 квартир в 21 доме, введённом в 2024–2026 гг. (дома найдены по координатам
+#    объектов ЕИСЖС), файл nspd_newbuild_flats.csv: кадастровый номер, площадь, кадастровая стоимость.
+# 2) Переоценка: тур ГКО ОКС 2026–2027 гг.; сценарий +25 % к измеренной медиане с 01.01.2028.
+# 3) Содержание непроданных помещений застройщиком (п. 7 ч. 2 ст. 153 ЖК РФ): 720 руб./м² в год, без окна.
+# 4) Большой остаток: 28,5 % к вводу (дома 2026 г.), распродажа до 4 лет.
+P=234000; MAINT=720.0; CARRY=0.13*P; REV=1.25
+fl=pd.read_csv(HERE/'nspd_newbuild_flats.csv',encoding='utf-8')
+fl['k']=fl.cost/fl.area
+fl['price']=fl.objId.map(o.set_index('objId').averagePrice)
+bd=fl.groupby(['objId','addr']).agg(k=('k','median'),price=('price','first')).reset_index()
+bd['ratio']=bd.k/bd.price
+KN=round(float(bd.k.median()),-3); KR=round(KN*REV,-3)  # медиана по домам
+R['v14_nspd']=dict(flats=int(len(fl)),buildings=int(len(bd)),objects=int(bd.objId.nunique()),
+    k_median_flats=float(fl.k.median()),k_median_bldg=float(bd.k.median()),
+    k_p10=float(bd.k.quantile(.1)),k_p90=float(bd.k.quantile(.9)),
+    ratio_median=float(bd.ratio.median()),ratio_p10=float(bd.ratio.quantile(.1)),
+    ratio_p90=float(bd.ratio.quantile(.9)),ratio_max=float(bd.ratio.max()),K_new=KN,K_reval=KR)
+R['v14_per_m2']={nm:dict(K=k,tax2028=k*0.02,pct_price_2028=k*0.02/P,tax_plus_maint=k*0.02+MAINT,
+    tax_share_of_carry=k*0.02/CARRY,flat50_tax2028=50*k*0.02,flat50_maint=50*MAINT)
+    for nm,k in [('фонд',K),('новостройки',KN),('после переоценки',KR)]}
+R['v14_obj_reval']={q:R['obj_tax28'][q]*KR/K for q in ['median','p90','max']}
+def proj(u,T,k,d=0.5):
+    tax=u*50000*(T-d)**2/(2*T)*k*0.02; mnt=u*50000*T/2*MAINT
+    return dict(u=u,T=T,K=k,tax_mln=tax/1e6,maint_mln=mnt/1e6,total_mln=(tax+mnt)/1e6,
+        pct_profit_base=(tax+mnt)/3.30e9,pct_profit_crisis=(tax+mnt)/1.48e9,tax_only_crisis=tax/1.48e9)
+R['v14_project']=[proj(u,T,k) for u in [0.17,0.285,0.46] for T in [2,3,4] for k in [KN,KR]]
+disc=0.20*0.46*10.5e9; tl=proj(0.46,3,KR)
+R['v14_tail']=dict(tl,discount20_mln=disc/1e6,pct_profit_base_after_disc=tl['total_mln']*1e6/(3.30e9-disc))
+def rt(share,m,k):
+    s=share*m*((2*m-0.5)/(2*m))**2
+    return dict(share=share,m=m,taxable=s,y2028=s*1e6*k*0.02/1e9)
+R['v14_rt']={'базовый':{'новостройки':rt(0.22,1.8,KN),'после переоценки':rt(0.22,1.8,KR)},
+    'большой остаток':{'новостройки':rt(0.285,2.5,KN),'после переоценки':rt(0.285,2.5,KR)}}
+json.dump(R,open(OUT,'w'),ensure_ascii=False,indent=1,default=float)
+print(json.dumps({k:R[k] for k in ['v14_nspd','v14_per_m2','v14_obj_reval','v14_tail','v14_rt']},ensure_ascii=False,indent=1,default=float))

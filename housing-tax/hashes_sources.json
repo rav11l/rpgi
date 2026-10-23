@@ -17,5 +17,11 @@
     "publisher": "Росстат",
     "title": "Жилищное хозяйство в России. 2025",
     "used": "табл. 2.2, диагр. 2.3 — блок v1.3 calc.py"
+  },
+  "nspd_newbuild_flats.csv": {
+    "sha256": "d8ac4ec62eecca7ff9a2c2cd93efb9a5499972133dbd3405394ea264a50bf0c0",
+    "source": "https://nspd.gov.ru (публичный интерфейс; сведения ЕГРН о помещениях)",
+    "collected": "2026-10-23",
+    "used": "блок v1.4 calc.py"
   }
 }
