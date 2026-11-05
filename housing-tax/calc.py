@@ -87,7 +87,7 @@ for nm,pct in sc13.items():
         y2028_K100=st*1e6*100000*0.02/1e9)
 R['v13_total']={nm:dict(y2027=R['v11_rt'][nm]['y2027']+R['v13_other']['scen'][nm]['y2027'],
                        y2028=R['v11_rt'][nm]['y2028']+R['v13_other']['scen'][nm]['y2028']) for nm in sc13}
-json.dump(R,open(OUT,'w'),ensure_ascii=False,indent=1,default=float)
+json.dump(R,open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=1,default=float)
 print(json.dumps({k:R[k] for k in ['v13_other','v13_total']},ensure_ascii=False,indent=1,default=float))
 
 # ---- v1.4: кадастровая стоимость новостроек, переоценка, содержание, большой остаток ----
@@ -124,5 +124,5 @@ def rt(share,m,k):
     return dict(share=share,m=m,taxable=s,y2028=s*1e6*k*0.02/1e9)
 R['v14_rt']={'базовый':{'новостройки':rt(0.22,1.8,KN),'после переоценки':rt(0.22,1.8,KR)},
     'большой остаток':{'новостройки':rt(0.285,2.5,KN),'после переоценки':rt(0.285,2.5,KR)}}
-json.dump(R,open(OUT,'w'),ensure_ascii=False,indent=1,default=float)
+json.dump(R,open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=1,default=float)
 print(json.dumps({k:R[k] for k in ['v14_nspd','v14_per_m2','v14_obj_reval','v14_tail','v14_rt']},ensure_ascii=False,indent=1,default=float))
