@@ -1,4 +1,4 @@
-# RPGI — Regional Price Gap Indicator, v0.4.0
+# RPGI — Regional Price Gap Indicator, v0.8.0
 
 ## Выпуск 0.8.0 — 5 ноября 2026
 
@@ -232,5 +232,5 @@ python housing-tax/calc.py             # → housing-tax/calc_results.json
 
 ## Цитирование
 
-Ахтямов Р. RPGI — Regional Price Gap Indicator, v0.4.0. Digital Economy Lab, 2026.
-DOI: 10.5281/zenodo.22693769 (идентификатор всех версий, всегда ведёт на последнюю). См. `CITATION.cff`.
+Ахтямов Р. RPGI — Regional Price Gap Indicator, v0.8.0. Digital Economy Lab, 2026.
+DOI выпуска 0.8.0: [10.5281/zenodo.23975773](https://doi.org/10.5281/zenodo.23975773). Все версии: [10.5281/zenodo.22693769](https://doi.org/10.5281/zenodo.22693769). См. `CITATION.cff`.
