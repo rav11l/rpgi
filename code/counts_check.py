@@ -93,18 +93,12 @@ for reg, d in gaps.items():
             panel.append((reg, y, d[y]-d[y-1], s1-s0))
 print(f"наблюдений: {len(panel)}, регионов: {len(set(r for r,_,_,_ in panel))}")
 print(f"объединённая корреляция разностей: {corr([x[3] for x in panel], [x[2] for x in panel]):+.3f}")
-ym_g, ym_s = {}, {}
-for reg, y, dg, ds in panel:
-    ym_g.setdefault(y, []).append(dg); ym_s.setdefault(y, []).append(ds)
-ym_g = {y: sum(v)/len(v) for y, v in ym_g.items()}; ym_s = {y: sum(v)/len(v) for y, v in ym_s.items()}
-st1 = [(reg, dg-ym_g[y], ds-ym_s[y]) for reg, y, dg, ds in panel]
-rm_g, rm_s = {}, {}
-for reg, dg, ds in st1:
-    rm_g.setdefault(reg, []).append(dg); rm_s.setdefault(reg, []).append(ds)
-rm_g = {r: sum(v)/len(v) for r, v in rm_g.items()}; rm_s = {r: sum(v)/len(v) for r, v in rm_s.items()}
-G = [dg-rm_g[reg] for reg, dg, ds in st1]; Sx = [ds-rm_s[reg] for reg, dg, ds in st1]
-r_fe = corr(Sx, G); n = len(G)
-print(f"двусторонние фиксированные эффекты: r = {r_fe:+.3f}, t ≈ {r_fe/((1-r_fe**2)/(n-2))**0.5:+.2f}")
+from panel_utils import fit_twfe
+import json
+result = fit_twfe(panel)
+print(f"Joint region/year fixed effects: b = {result['slope']:+.6f}, cluster SE = {result['cluster_se']:.6f}, 95% CI = {result['ci95']}")
+with open(D + 'counts_panel_results.json', 'w', encoding='utf-8') as out:
+    json.dump(result, out, ensure_ascii=False, indent=2)
 
 # ——— февраль 2026 по числу договоров ———
 print("\n" + "=" * 74)

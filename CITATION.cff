@@ -4,15 +4,15 @@ title: "RPGI — Regional Price Gap Indicator"
 abstract: >-
   Открытый индикатор разрыва цен первичного и вторичного рынков жилья по центрам
   субъектов Российской Федерации и доли ипотечных выдач под договоры долевого участия
-  по регионам, с разложением разрыва на цену и состав и с явными границами применимости.
-version: 0.8.0
-doi: "10.5281/zenodo.22693769"
-date-released: "2026-11-05"
+  по регионам, с описательными сопоставлениями, пакетами WP-01/02 и явными границами применимости.
+version: 0.9.0
+doi: "10.5281/zenodo.24115487"
+date-released: "2026-11-10"
 type: dataset
 license: CC-BY-4.0
 license-url: "https://creativecommons.org/licenses/by/4.0/"
 repository-code: "https://github.com/rav11l/rpgi"
-url: "https://doi.org/10.5281/zenodo.22693769"
+url: "https://doi.org/10.5281/zenodo.24115487"
 authors:
   - family-names: "Akhtyamov"
     given-names: "Ravil"

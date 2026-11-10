@@ -1,0 +1,24 @@
+{
+  "n": 353,
+  "regions": 73,
+  "years": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "parameters": 78,
+  "slope": -0.015421829901343205,
+  "cluster_se": 0.1840150335785466,
+  "t_stat": -0.08380744551917502,
+  "df": 72,
+  "ci95": [
+    -0.38224909505823684,
+    0.3514054352555504
+  ],
+  "pooled_r": 0.03365733957170647,
+  "exact_fe_r": -0.005547248762057845,
+  "method": "Joint OLS with region and year indicators; region-clustered CR1; Student t(G-1)",
+  "source_scope": "Current data/sources/cbr workbooks; all available months. WP-01 uses its separately frozen August 2026 snapshot."
+}

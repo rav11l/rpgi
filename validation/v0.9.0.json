@@ -1,0 +1,82 @@
+{
+  "synthetic_unbalanced_panel_matches_statsmodels": true,
+  "main_volume_matches_statsmodels": {
+    "n": 353,
+    "regions": 73,
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "parameters": 78,
+    "slope": -0.015421829901343205,
+    "cluster_se": 0.1840150335785466,
+    "t_stat": -0.08380744551917502,
+    "df": 72,
+    "ci95": [
+      -0.38224909505823684,
+      0.3514054352555504
+    ],
+    "pooled_r": 0.03365733957170647,
+    "exact_fe_r": -0.005547248762057845,
+    "method": "Joint OLS with region and year indicators; region-clustered CR1; Student t(G-1)"
+  },
+  "main_counts_matches_statsmodels": {
+    "n": 353,
+    "regions": 73,
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "parameters": 78,
+    "slope": -0.058108934947624556,
+    "cluster_se": 0.16653120840001956,
+    "t_stat": -0.3489372082621466,
+    "df": 72,
+    "ci95": [
+      -0.390082831605239,
+      0.2738649617099899
+    ],
+    "pooled_r": -0.01541640936822841,
+    "exact_fe_r": -0.02144025751291198,
+    "method": "Joint OLS with region and year indicators; region-clustered CR1; Student t(G-1)"
+  },
+  "frozen_wp01_results_unchanged": true,
+  "frozen_primary_sources_and_evidence_unchanged": 32,
+  "other_wp_packages_unchanged": true,
+  "frozen_volume_matches_independent_verifier": {
+    "n": 353,
+    "regions": 73,
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "parameters": 78,
+    "slope": -0.027978040556464048,
+    "cluster_se": 0.18463726437951092,
+    "t_stat": -0.15152976107226573,
+    "df": 72,
+    "ci95": [
+      -0.39604570014513485,
+      0.3400896190322068
+    ],
+    "pooled_r": 0.0307606583085148,
+    "exact_fe_r": -0.010085338338494948,
+    "method": "Joint OLS with region and year indicators; region-clustered CR1; Student t(G-1)",
+    "source_scope": "Current data/sources/cbr workbooks; all available months. WP-01 uses its separately frozen August 2026 snapshot."
+  },
+  "wp02_matrix_totals": {
+    "не найдено": 29,
+    "не проверено": 3,
+    "раскрыто": 22,
+    "частично": 16
+  }
+}

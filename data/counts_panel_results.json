@@ -1,0 +1,23 @@
+{
+  "n": 353,
+  "regions": 73,
+  "years": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "parameters": 78,
+  "slope": -0.058108934947624556,
+  "cluster_se": 0.16653120840001956,
+  "t_stat": -0.3489372082621466,
+  "df": 72,
+  "ci95": [
+    -0.390082831605239,
+    0.2738649617099899
+  ],
+  "pooled_r": -0.01541640936822841,
+  "exact_fe_r": -0.02144025751291198,
+  "method": "Joint OLS with region and year indicators; region-clustered CR1; Student t(G-1)"
+}
