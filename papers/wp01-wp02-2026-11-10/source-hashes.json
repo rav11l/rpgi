@@ -1,0 +1,23 @@
+{
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_1kv-2026.xlsx": "6a0a19f47432d00702af8a19b9d0e8a9a1a73e0e25fe6c8ee5992e344e0ca92d",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_2kv-2026.xlsx": "b8110ffb9d717d76f9bf3520e993dbff41ee9ee77749d35e2b6b7013851d72b6",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_4kv-2021.xlsx": "b6568a1f6b431b772d32ea0f3415f7340dde75804cb1d443f839925c18c4a8ce",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_4kv-2022.xlsx": "c274f6f6b0a3b369fb5c350d542f0b451c7074884717f770d706449afdf3a835",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_4kv-2023.xlsx": "4a2b65d51f284e9cec463fdad9c181f82a0202c6e94e27bd9eea15de00794ccd",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_4kv-2024.xlsx": "18d57d0b6e1e810a9c8e5c375bae59275a5774ea3dfcb7770cd1b1b40ca5fab4",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_perv_4kv-2025.xlsx": "5acd5c2f6c0a00d1cdef56adf11a14313a27e55895b95c48a9ebb9b215da9a51",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_1kv-2026.xlsx": "0927418e5d2abb6913eed9172b47b2046da0c71bf0a1c37bbc173b19abd6811f",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_2kv-2026.xlsx": "f9e1659dcb40763e8affea487815bad4762159e5b30154cfbaf78b7c3789f601",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_4kv-2021.xlsx": "3c4965d7fa560ed780af292196e99fd121cfe6ceff4c7b54fbed7745f912ee4b",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_4kv-2022.xlsx": "e67a55a14e703f464289566a2c6ad5e1b7e3a919c346328c54e8d92020e58761",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_4kv-2023.xlsx": "972a17eaa373ecdd6cd7f3ade8e911fb6021e2ed68c7fe97d129cc66faf350a4",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_4kv-2024.xlsx": "beebff2afbbfa6c76a6123410f965c17070ddfad7a1cc6a9ada5f93f17a56038",
+  "RPGI\\rpgi\\data\\sources\\rosstat\\sred_cen_vtor_4kv-2025.xlsx": "139a12c08f368ae9fba6208aa79763c7aeb42db8ca39b819865de86e6e776cde",
+  "RPGI\\rpgi\\data\\sources\\cbr\\02_10_Quantity_mortgage.xlsx": "aaf91ddb85b3307ea207e368847e87bba23c5f3cbba43d0d469c3c35a713ffce",
+  "RPGI\\rpgi\\data\\sources\\cbr\\02_11_New_loans_mortgage.xlsx": "dd8b0b9c3a28d2b7115df7d55630674e3360bbdd7507b49cd960fb7da9877007",
+  "RPGI\\rpgi\\data\\sources\\cbr\\02_13_Rates_mortgage.xlsx": "02b451ef4c35b3a9bcb5f4cd7f44d811023ed6f1fff52e615d6b0d2ad7c06c1b",
+  "RPGI\\rpgi\\data\\sources\\cbr\\02_15_Quantity_scpa_mortgage.xlsx": "6d201c875f4ab3743faa0deb10c6ae9c383db381318ebd13d3241d2e692a5c33",
+  "RPGI\\rpgi\\data\\sources\\cbr\\02_16_New_loans_scpa_mortgage.xlsx": "057c4cc3fe6b3237c094d0d765e36dd2ec547844045315eaebe75faa06361ec4",
+  "RPGI\\rpgi\\data\\sources\\cbr\\02_17_Rates_scpa_mortgage.xlsx": "908d49408ff5c006e17f57dd1f1188a6a3c429b766b963420fb737fa7c189cb2",
+  "Журнал проверки данных\\matrix_land_openness_2026-09-11.csv": "8a3a78b3ee19048315bea0fb25240c7b958aa6e7ef32786999a1a1af7c310d7a"
+}
