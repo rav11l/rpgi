@@ -14,6 +14,11 @@
       "sha256": "b8110ffb9d717d76f9bf3520e993dbff41ee9ee77749d35e2b6b7013851d72b6"
     },
     {
+      "file": "data/sources/rosstat/sred_cen_perv_3kv-2026.xlsx",
+      "bytes": 41832,
+      "sha256": "803c7ea342ed7770a93ab6477fd591b48b7d0b4b9a9bf5e3d579e9761fb07d21"
+    },
+    {
       "file": "data/sources/rosstat/sred_cen_perv_4kv-2021.xlsx",
       "bytes": 46163,
       "sha256": "b6568a1f6b431b772d32ea0f3415f7340dde75804cb1d443f839925c18c4a8ce"
@@ -49,6 +54,11 @@
       "sha256": "f9e1659dcb40763e8affea487815bad4762159e5b30154cfbaf78b7c3789f601"
     },
     {
+      "file": "data/sources/rosstat/sred_cen_vtor_3kv-2026.xlsx",
+      "bytes": 42154,
+      "sha256": "3a6c97e9a59a26843e9557b1a54ec40450282af105cb32863289de9384e8c264"
+    },
+    {
       "file": "data/sources/rosstat/sred_cen_vtor_4kv-2021.xlsx",
       "bytes": 54664,
       "sha256": "3c4965d7fa560ed780af292196e99fd121cfe6ceff4c7b54fbed7745f912ee4b"
@@ -75,5 +85,5 @@
     }
   ],
   "сверка_изданий": "Каждый год проверен по всем доступным изданиям (4кв, 2кв, 1кв и внутренние имена вида Ur_MJil_2-3_YYYY): 26 книг, 14 пар. Максимальное расхождение по I и II кварталам графы «Все типы квартир» по всем центрам — 0,50 ₽, то есть округление (часть изданий хранит целые рубли). Ряд от выбора издания не зависит.",
-  "обновлено": "2026-09-29"
+  "обновлено": "2026-11-16"
 }
