@@ -6,12 +6,13 @@ abstract: >-
   субъектов Российской Федерации и доли ипотечных выдач под договоры долевого участия
   по регионам, с описательными сопоставлениями, пакетами WP-01/02 и явными границами применимости.
 version: 0.9.1
+doi: "10.5281/zenodo.24334376"
 date-released: "2026-11-18"
 type: dataset
 license: CC-BY-4.0
 license-url: "https://creativecommons.org/licenses/by/4.0/"
 repository-code: "https://github.com/rav11l/rpgi"
-url: "https://github.com/rav11l/rpgi/releases/tag/v0.9.1"
+url: "https://doi.org/10.5281/zenodo.24334376"
 authors:
   - family-names: "Akhtyamov"
     given-names: "Ravil"
