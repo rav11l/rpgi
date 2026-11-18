@@ -1,0 +1,30 @@
+{
+  "source_url": "https://www.business-gazeta.ru/article/716099",
+  "publication_date": "2026-11-18",
+  "source_type": "press account of committee discussion; not enacted law",
+  "reported": {
+    "tax_base_billion_rub": 90,
+    "revenue_2027_billion_rub": 0.9,
+    "revenue_2028_billion_rub": 1.8,
+    "developer_revenue_2027_billion_rub": 0.2,
+    "developer_count": 110,
+    "unsold_pct_method_unspecified": 67
+  },
+  "author_baseline": {
+    "developer_2027": 0.36,
+    "other_2027": 0.72,
+    "total_2027": 1.08,
+    "total_2028": 2.15
+  },
+  "derived": {
+    "other_2027": 0.7,
+    "developer_difference_pct": 80,
+    "total_2027_difference_pct": 20
+  },
+  "limitations": [
+    "Rounded amounts",
+    "Private-housing proxy differs from coverage including public institutions",
+    "67% is not comparable to the Kazan sample 21.9%",
+    "Tables 4–8 and numerical calculation files unchanged"
+  ]
+}
